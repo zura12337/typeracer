@@ -1,3 +1,12 @@
+$background-color: #10172b;
+$primary-color: #2d395c;
+$secondary-color: #62729c;
+$text-primary-color: #f5f5f5;
+$text-secondary-color: #c4c4c4;
+
+$success: #42812e;
+$danger: #c45959;
+
 * {
   margin: 0;
   padding: 0;
@@ -5,13 +14,12 @@
 
 html body {
   font-family: "Share Tech Mono", serif;
-  background-color: #10172b;
+  background-color: $background-color;
   margin: 50px 100px;
 }
-
 .primary-text {
   font-family: "Press Start 2P", serif;
-  color: #f5f5f5;
+  color: $text-primary-color;
   font-weight: 400;
   font-size: 15px;
 }
@@ -23,28 +31,24 @@ html body {
   outline: none !important;
   padding-left: 10px;
   font-weight: 400;
-  background-color: #62729c;
+  background-color: $secondary-color;
   color: white;
 }
-
 *:focus {
   outline: none !important;
 }
 
 #name-submit {
   border-radius: 0;
-  background-color: #2d395c;
+  background-color: $primary-color;
   border: 0;
 }
 
 #name-submit:active {
-  -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
 }
-
 #name-submit:focus {
-  -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
 }
 
 .quote-text {
@@ -58,25 +62,16 @@ html body {
 
 .quotes {
   margin-top: 150px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  flex-direction: column;
+  justify-content: center;
+  .input {
+    padding: 5px;
+    font-size: 25px;
+    width: 80%;
+    margin: auto;
+  }
 }
-
-.quotes .input {
-  padding: 5px;
-  font-size: 25px;
-  width: 80%;
-  margin: auto;
-}
-
 .quote {
   margin: auto;
   text-align: center;
@@ -84,21 +79,18 @@ html body {
 
 .current-word {
   text-decoration: underline;
-  -webkit-text-decoration-color: #f5f5f5;
-          text-decoration-color: #f5f5f5;
+  text-decoration-color: #f5f5f5;
 }
 
 .success {
-  color: #42812e;
-  -webkit-text-decoration-color: #42812e;
-          text-decoration-color: #42812e;
+  color: $success;
+  text-decoration-color: $success;
 }
 
 .danger {
-  color: #c45959;
+  color: $danger;
 }
 
 .false {
-  color: #c45959;
+  color: $danger;
 }
-/*# sourceMappingURL=index.css.map */

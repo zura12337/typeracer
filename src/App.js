@@ -1,23 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import NavBar from "./components/NavBar";
+import TypeRacer from "./components/TypeRacer";
+
+const quotes = [
+  // "It is better to be hated for what you are than to be loved for what you are not",
+  // "All that is gold does not glitter, Not all those who wander are lost; The old that is strong does not wither, Deep roots are not reached by the frost",
+  "Something is our choices, Harry, that show what we truly are, far more than our abilities.",
+];
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <NavBar />
+      <TypeRacer quotes={quotes} />
     </div>
   );
 }
