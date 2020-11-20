@@ -3,80 +3,119 @@
 import React, { useEffect, useState } from "react";
 
 export default function TypeRacer({ quotes }) {
+  const [error, setError] = useState(false);
+  const [succesChars, setSuccessChars] = useState();
   const [quote, setQuote] = useState();
-  const [succedWords, setSuccedWords] = useState("");
-  const [succedChars, setSuccedChars] = useState("");
-  const [currentChar, setCurrentChar] = useState();
-  const [nextChar, setNextChar] = useState();
-  const [currentWord, setCurrentWord] = useState();
-  const [nextCharIndex, setNextCharIndex] = useState(1);
-  const [value, setValue] = useState();
+  const [wordIndex, setWordIndex] = useState();
+  const [charIndex, setCharIndex] = useState();
+  const [nextCharIndex, setNextCharIndex] = useState();
+  const [quoteArray, setQuoteArray] = useState([]);
+  const [value, setValue] = useState("");
+  const [fullValue, setFullValue] = useState("");
+  const [done, setDone] = useState(false);
 
   useEffect(() => {
     const index = Math.floor(Math.random() * quotes.length);
-    let quote = quotes[index].split(" ");
-    let currentWord = quote[0] + " ";
-    let currentChar = currentWord[0];
-    let nextChar = currentWord[1];
-    quote.shift();
-    quote = quote.join(" ");
-    setNextChar(nextChar);
-    setCurrentWord(currentWord);
-    setCurrentChar(currentChar);
-    setQuote(quote);
+    const quote = quotes[index];
+    let quoteArray = quote.split(" ");
+    setWordIndex(0);
+    setCharIndex(0);
+    setNextCharIndex(1);
+    quoteArray = quoteArray.slice(1);
+    quoteArray = quoteArray.join(" ");
+    setQuote(quoteArray);
+    setQuoteArray(quote.split(" "));
   }, []);
-  const handleChange = (e) => {
-    let currentValue = e.target.value;
-    setValue(currentValue);
-    if (currentValue[currentValue.length - 1] === currentChar) {
-      setCurrentChar(nextChar);
-      setNextCharIndex((nextCharIndex) => nextCharIndex + 1);
-      setNextChar(currentWord[nextCharIndex + 1]);
-      setSuccedChars(succedChars + currentValue[currentValue.length - 1]);
+
+  const un = (variable) => {
+    if (typeof variable !== "undefined") {
+      return variable;
     } else {
-      setNextChar(currentChar);
-      setNextCharIndex((nextCharIndex) => nextCharIndex - 1);
-      setCurrentChar(currentWord[nextCharIndex - 2]);
-      setSuccedChars(currentValue);
+      return "";
     }
-    if (currentValue === currentWord) {
-      setSuccedChars("");
-      setSuccedWords(succedWords + currentValue);
-      let quoteArray = quote.split(" ");
-      let currentWord = quoteArray[0] + " ";
-      let currentChar = currentWord[0];
-      let nextChar = currentWord[1];
-      setCurrentChar(currentChar);
-      quoteArray.shift();
-      quoteArray = quoteArray.join(" ");
-      setQuote(quoteArray);
-      setNextChar(nextChar);
-      setCurrentWord(currentWord);
-      setNextCharIndex(1);
-      setValue("");
+  };
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
+    setFullValue(e.target.value);
+    let currentWord;
+    if (wordIndex === quoteArray.length - 1) {
+      currentWord = quoteArray[wordIndex];
+    } else {
+      currentWord = quoteArray[wordIndex] + " ";
+    }
+    if (
+      currentWord[charIndex] === e.target.value[e.target.value.length - 1] &&
+      charIndex === e.target.value.length - 1
+    ) {
+      setError(false);
+      setCharIndex(nextCharIndex);
+      setNextCharIndex((nextCharIndex) => nextCharIndex + 1);
+      setSuccessChars(
+        (succesChars) =>
+          un(succesChars) + un(e.target.value[e.target.value.length - 1])
+      );
+      if (e.target.value === currentWord) {
+        setValue("");
+        setCharIndex(0);
+        setNextCharIndex(1);
+        if (quoteArray.length - 1 !== wordIndex) {
+          setWordIndex((wordIndex) => wordIndex + 1);
+        }
+        let localQuoteArray = quoteArray.slice(wordIndex + 2);
+        localQuoteArray = localQuoteArray.join(" ");
+        setQuote(localQuoteArray);
+      }
+    } else {
+      setError(true);
+    }
+    if (wordIndex + 1 === quoteArray.length) {
+      if (e.target.value === quoteArray[wordIndex]) {
+        setDone(true);
+        setWordIndex(0);
+        setCharIndex(0);
+        setNextCharIndex(1);
+      }
     }
   };
 
   return (
     <div className="container quotes">
-      {quote && (
-        <div className="quote">
-          <span className="quote-text success">{succedWords}</span>
-          <span className="quote-text success">{succedChars}</span>
-          <span className="quote-text">{currentChar}</span>
-          <span className="quote-text">{nextChar}</span>
-          <span className="quote-text">
-            {currentWord.slice(nextCharIndex + 1)}
-          </span>
-          <span className="quote-text">{quote}</span>
-        </div>
+      {!done &&
+        (quoteArray,
+        wordIndex,
+        charIndex,
+        nextCharIndex && (
+          <div className="quote">
+            <span className="quote-text success">{succesChars}</span>
+            <span className="quote-text">
+              {quoteArray[wordIndex][charIndex]}
+            </span>
+            <span className="quote-text">
+              {quoteArray[wordIndex][nextCharIndex]}
+            </span>
+            <span className="quote-text">
+              {quoteArray[wordIndex].slice(nextCharIndex + 1)}{" "}
+            </span>
+            <span className="quote-text">{quote}</span>
+          </div>
+        ))}
+
+      {!error ? (
+        <input
+          type="text"
+          value={value}
+          onChange={handleChange}
+          className="input mt-5"
+        />
+      ) : (
+        <input
+          type="text"
+          onChange={handleChange}
+          value={value}
+          className="input mt-5 error"
+        />
       )}
-      <input
-        type="text"
-        onChange={handleChange}
-        value={value}
-        className={`input mt-5`}
-      />
     </div>
   );
 }

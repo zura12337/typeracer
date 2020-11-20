@@ -98,7 +98,7 @@ html body {
   color: #c45959;
 }
 
-.false {
-  color: #c45959;
+.error {
+  color: #c45959 !important;
 }
 /*# sourceMappingURL=index.css.map */
