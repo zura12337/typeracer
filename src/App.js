@@ -1,5 +1,5 @@
 import NavBar from "./components/NavBar";
-import TypeRacer from "./components/TypeRacer";
+import Start from "./components/Start";
 
 const quotes = [
   "It is better to be hated for what you are than to be loved for what you are not",
@@ -10,7 +10,8 @@ const quotes = [
 function App() {
   return (
     <div>
-      <TypeRacer quotes={quotes} />
+      <NavBar />
+      <Start quotes={quotes} />
     </div>
   );
 }

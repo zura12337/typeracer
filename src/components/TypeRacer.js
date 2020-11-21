@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 
 export default function TypeRacer({ quotes }) {
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
   const [succesChars, setSuccessChars] = useState();
   const [quote, setQuote] = useState();
   const [wordIndex, setWordIndex] = useState();
@@ -11,8 +11,8 @@ export default function TypeRacer({ quotes }) {
   const [nextCharIndex, setNextCharIndex] = useState();
   const [quoteArray, setQuoteArray] = useState([]);
   const [value, setValue] = useState("");
-  const [fullValue, setFullValue] = useState("");
   const [done, setDone] = useState(false);
+  const [started, setStarted] = useState(false);
 
   useEffect(() => {
     const index = Math.floor(Math.random() * quotes.length);
@@ -37,18 +37,20 @@ export default function TypeRacer({ quotes }) {
 
   const handleChange = (e) => {
     setValue(e.target.value);
-    setFullValue(e.target.value);
     let currentWord;
     if (wordIndex === quoteArray.length - 1) {
       currentWord = quoteArray[wordIndex];
     } else {
       currentWord = quoteArray[wordIndex] + " ";
     }
+    if (e.target.value[e.target.value.length - 1] !== succesChars) {
+      setError(currentWord[charIndex]);
+    }
     if (
       currentWord[charIndex] === e.target.value[e.target.value.length - 1] &&
       charIndex === e.target.value.length - 1
     ) {
-      setError(false);
+      setError("");
       setCharIndex(nextCharIndex);
       setNextCharIndex((nextCharIndex) => nextCharIndex + 1);
       setSuccessChars(
@@ -66,8 +68,8 @@ export default function TypeRacer({ quotes }) {
         localQuoteArray = localQuoteArray.join(" ");
         setQuote(localQuoteArray);
       }
-    } else {
-      setError(true);
+    } else if (e.target.value.length > value.length) {
+      setError(currentWord[charIndex]);
     }
     if (wordIndex + 1 === quoteArray.length) {
       if (e.target.value === quoteArray[wordIndex]) {
@@ -79,34 +81,87 @@ export default function TypeRacer({ quotes }) {
     }
   };
 
+  const onKeyDown = (e) => {
+    if (
+      e.keyCode === 8 &&
+      value.length > 0 &&
+      value.length <= quoteArray[wordIndex].length &&
+      succesChars &&
+      charIndex > 0 &&
+      nextCharIndex > 1
+    ) {
+      if (
+        e.target.value.length <=
+        succesChars.split(" ")[wordIndex].length + 1
+      ) {
+        setCharIndex((charIndex) => charIndex - 1);
+        setNextCharIndex((nextCharIndex) => nextCharIndex - 1);
+        if (succesChars) {
+          setSuccessChars((succesChars) =>
+            succesChars.slice(0, succesChars.length - 1)
+          );
+        }
+      }
+    }
+    if (value.length === 0) {
+      setError("");
+    }
+  };
+
+  const onKeyUp = (e) => {
+    if (
+      e.keyCode === 8 &&
+      value.length > 0 &&
+      value.length <= quoteArray[wordIndex].length &&
+      succesChars &&
+      charIndex > 0 &&
+      nextCharIndex > 1
+    ) {
+      if (e.target.value.length <= succesChars.length + 1) {
+        if (error) {
+          setError((error) => error.slice(0, error.length - 1));
+        }
+      }
+    }
+    if (value.length === 0) {
+      setError("");
+    }
+  };
+
   return (
     <div className="container quotes">
-      {!done &&
+      {
         (quoteArray,
         wordIndex,
         charIndex,
         nextCharIndex && (
           <div className="quote">
             <span className="quote-text success">{succesChars}</span>
-            <span className="quote-text">
-              {quoteArray[wordIndex][charIndex]}
-            </span>
-            <span className="quote-text">
+            {!error ? (
+              <span className="quote-text current-word">
+                {quoteArray[wordIndex][charIndex]}
+              </span>
+            ) : (
+              <span className="quote-text error">{error}</span>
+            )}
+            <span className="quote-text current-word">
               {quoteArray[wordIndex][nextCharIndex]}
             </span>
-            <span className="quote-text">
+            <span className="quote-text current-word">
               {quoteArray[wordIndex].slice(nextCharIndex + 1)}{" "}
             </span>
             <span className="quote-text">{quote}</span>
           </div>
-        ))}
-
+        ))
+      }
       {!error ? (
         <input
           type="text"
           value={value}
           onChange={handleChange}
           className="input mt-5"
+          onKeyDown={onKeyDown}
+          autoFocus={true}
         />
       ) : (
         <input
@@ -114,6 +169,8 @@ export default function TypeRacer({ quotes }) {
           onChange={handleChange}
           value={value}
           className="input mt-5 error"
+          onKeyDown={onKeyDown}
+          onKeyUp={onKeyUp}
         />
       )}
     </div>
