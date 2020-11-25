@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
+import Timer from "./Timer";
 
-export default function TypeRacer({ quotes }) {
+export default function TypeRacer({ quotes, start }) {
   const [error, setError] = useState("");
   const [succesChars, setSuccessChars] = useState();
   const [quote, setQuote] = useState();
@@ -12,7 +13,6 @@ export default function TypeRacer({ quotes }) {
   const [quoteArray, setQuoteArray] = useState([]);
   const [value, setValue] = useState("");
   const [done, setDone] = useState(false);
-  const [started, setStarted] = useState(false);
 
   useEffect(() => {
     const index = Math.floor(Math.random() * quotes.length);
@@ -128,51 +128,91 @@ export default function TypeRacer({ quotes }) {
     }
   };
 
+  const handleReset = () => {
+    document.getElementById("input").focus();
+    console.log(document.getElementById("input").focus());
+    const index = Math.floor(Math.random() * quotes.length);
+    const quote = quotes[index];
+    let quoteArray = quote.split(" ");
+    setWordIndex(0);
+    setCharIndex(0);
+    setNextCharIndex(1);
+    quoteArray = quoteArray.slice(1);
+    quoteArray = quoteArray.join(" ");
+    setQuote(quoteArray);
+    setQuoteArray(quote.split(" "));
+    setDone(false);
+    setSuccessChars("");
+  };
+
   return (
-    <div className="container quotes">
-      {
-        (quoteArray,
-        wordIndex,
-        charIndex,
-        nextCharIndex && (
-          <div className="quote">
-            <span className="quote-text success">{succesChars}</span>
-            {!error ? (
+    <>
+      <Timer isActive={!done && start ? true : false} />
+      <div className="container quotes">
+        {!done ? (
+          (quoteArray,
+          wordIndex,
+          charIndex,
+          nextCharIndex && (
+            <div className="quote">
+              <span className="quote-text success">{succesChars}</span>
+              {!error ? (
+                <span className="quote-text current-word">
+                  {quoteArray[wordIndex][charIndex]}
+                </span>
+              ) : (
+                <span className="quote-text error">{error}</span>
+              )}
               <span className="quote-text current-word">
-                {quoteArray[wordIndex][charIndex]}
+                {quoteArray[wordIndex][nextCharIndex]}
               </span>
-            ) : (
-              <span className="quote-text error">{error}</span>
-            )}
-            <span className="quote-text current-word">
-              {quoteArray[wordIndex][nextCharIndex]}
-            </span>
-            <span className="quote-text current-word">
-              {quoteArray[wordIndex].slice(nextCharIndex + 1)}{" "}
-            </span>
-            <span className="quote-text">{quote}</span>
+              <span className="quote-text current-word">
+                {quoteArray[wordIndex].slice(nextCharIndex + 1)}{" "}
+              </span>
+              <span className="quote-text">{quote}</span>
+            </div>
+          ))
+        ) : (
+          <div className="quote">
+            <span className="quote-text success">{quoteArray.join(" ")}</span>
           </div>
-        ))
-      }
-      {!error ? (
-        <input
-          type="text"
-          value={value}
-          onChange={handleChange}
-          className="input mt-5"
-          onKeyDown={onKeyDown}
-          autoFocus={true}
-        />
-      ) : (
-        <input
-          type="text"
-          onChange={handleChange}
-          value={value}
-          className="input mt-5 error"
-          onKeyDown={onKeyDown}
-          onKeyUp={onKeyUp}
-        />
-      )}
-    </div>
+        )}
+        {!error ? (
+          <input
+            type="text"
+            id="input"
+            value={value}
+            onChange={handleChange}
+            className="input mt-5"
+            onKeyDown={onKeyDown}
+            disabled={done && true}
+            autoFocus
+          />
+        ) : (
+          <input
+            type="text"
+            id="input"
+            onChange={handleChange}
+            value={value}
+            className="input mt-5 error"
+            onKeyDown={onKeyDown}
+            onKeyUp={onKeyUp}
+            disabled={done && true}
+            autoFocus
+          />
+        )}
+        {done && (
+          <div className="text-center">
+            <button
+              onClick={handleReset}
+              id="button"
+              className="btn btn-primary mt-5 "
+            >
+              Restart
+            </button>
+          </div>
+        )}
+      </div>
+    </>
   );
 }

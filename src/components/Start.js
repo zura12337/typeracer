@@ -3,28 +3,28 @@ import TypeRacer from "./TypeRacer";
 
 export default function Start({ quotes }) {
   const [started, setStarted] = useState(false);
-  const [seconds, setSeconds] = useState(3);
-
+  const [seconds, setSeconds] = useState(4);
+  const [start, setStart] = useState(false);
   useEffect(() => {
-    const countdown = setInterval(() => {
-      if (seconds > 0) {
-        setSeconds((seconds) => seconds - 1);
-      }
-      if (seconds <= 0) {
-        clearInterval(countdown);
-      }
-    }, 1000);
-  }, []);
+    const timer =
+      seconds > 0 && setInterval(() => setSeconds(seconds - 1), 1000);
+
+    // seconds <= 0 && setStarted(false);
+    seconds <= 0 && setStart(true);
+    return () => {
+      clearInterval(timer);
+    };
+  }, [seconds, start]);
   return (
     <div className="container">
       {started ? (
         <>
-          {seconds >= 0 && (
+          {seconds > 0 && (
             <div className="timeout">
-              <h1 className="primary-text">00:0{seconds}</h1>
+              <h1 className="primary-text h1">00:0{seconds}</h1>
             </div>
           )}
-          <TypeRacer quotes={quotes} />
+          <TypeRacer start={start} setStart={setStart} quotes={quotes} />
         </>
       ) : (
         <div className="center">

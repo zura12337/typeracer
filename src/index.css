@@ -36,6 +36,9 @@ html body {
   border: 0;
   padding: 10px 20px 10px 20px;
   height: 45px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
 }
 
 #button:active {

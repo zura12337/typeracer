@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 
 export default function NavBar() {
   return (
-    <nav class="navbar navbar-expand-lg navbar-custom">
-      <a class="navbar-brand" href="/">
+    <nav className="navbar navbar-expand-lg navbar-custom">
+      <a className="navbar-brand" href="/">
         TypeRacer
       </a>
       <button
-        class="navbar-toggler"
+        className="navbar-toggler"
         type="button"
         data-toggle="collapse"
         data-target="#navbarNavAltMarkup"
@@ -15,17 +15,17 @@ export default function NavBar() {
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <span class="navbar-toggler-icon"></span>
+        <span className="navbar-toggler-icon"></span>
       </button>
       <div
-        class="collapse navbar-collapse justify-content-end"
+        className="collapse navbar-collapse justify-content-end"
         id="navbarNavAltMarkup"
       >
-        <div class="navbar-nav">
-          <a class="nav-item nav-link" href="/">
+        <div className="navbar-nav">
+          <a className="nav-item nav-link" href="/">
             Sign In
           </a>
-          <a id="button" class="nav-item nav-link" href="/">
+          <a id="button" className="nav-item nav-link" href="/">
             Register
           </a>
         </div>
