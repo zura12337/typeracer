@@ -3,10 +3,9 @@
 import React, { useEffect, useState } from "react";
 import Timer from "./Timer";
 
-export default function TypeRacer({ quotes, start }) {
+export default function TypeRacer({ quote, start, setStart, setQuote }) {
   const [error, setError] = useState("");
-  const [succesChars, setSuccessChars] = useState();
-  const [quote, setQuote] = useState();
+  const [successChars, setSuccessChars] = useState();
   const [wordIndex, setWordIndex] = useState();
   const [charIndex, setCharIndex] = useState();
   const [nextCharIndex, setNextCharIndex] = useState();
@@ -15,8 +14,6 @@ export default function TypeRacer({ quotes, start }) {
   const [done, setDone] = useState(false);
 
   useEffect(() => {
-    const index = Math.floor(Math.random() * quotes.length);
-    const quote = quotes[index];
     let quoteArray = quote.split(" ");
     setWordIndex(0);
     setCharIndex(0);
@@ -43,7 +40,7 @@ export default function TypeRacer({ quotes, start }) {
     } else {
       currentWord = quoteArray[wordIndex] + " ";
     }
-    if (e.target.value[e.target.value.length - 1] !== succesChars) {
+    if (e.target.value[e.target.value.length - 1] !== successChars) {
       setError(currentWord[charIndex]);
     }
     if (
@@ -54,8 +51,8 @@ export default function TypeRacer({ quotes, start }) {
       setCharIndex(nextCharIndex);
       setNextCharIndex((nextCharIndex) => nextCharIndex + 1);
       setSuccessChars(
-        (succesChars) =>
-          un(succesChars) + un(e.target.value[e.target.value.length - 1])
+        (successChars) =>
+          un(successChars) + un(e.target.value[e.target.value.length - 1])
       );
       if (e.target.value === currentWord) {
         setValue("");
@@ -86,17 +83,17 @@ export default function TypeRacer({ quotes, start }) {
       e.keyCode === 8 &&
       value.length > 0 &&
       value.length <= quoteArray[wordIndex].length &&
-      succesChars &&
+      successChars &&
       charIndex > 0 &&
       nextCharIndex > 1
     ) {
       if (
         e.target.value.length <=
-        succesChars.split(" ")[wordIndex].length + 1
+        successChars.split(" ")[wordIndex].length + 1
       ) {
         setCharIndex((charIndex) => charIndex - 1);
         setNextCharIndex((nextCharIndex) => nextCharIndex - 1);
-        if (succesChars) {
+        if (successChars) {
           setSuccessChars((succesChars) =>
             succesChars.slice(0, succesChars.length - 1)
           );
@@ -113,11 +110,11 @@ export default function TypeRacer({ quotes, start }) {
       e.keyCode === 8 &&
       value.length > 0 &&
       value.length <= quoteArray[wordIndex].length &&
-      succesChars &&
+      successChars &&
       charIndex > 0 &&
       nextCharIndex > 1
     ) {
-      if (e.target.value.length <= succesChars.length + 1) {
+      if (e.target.value.length <= successChars.length + 1) {
         if (error) {
           setError((error) => error.slice(0, error.length - 1));
         }
@@ -128,26 +125,8 @@ export default function TypeRacer({ quotes, start }) {
     }
   };
 
-  const handleReset = () => {
-    document.getElementById("input").focus();
-    console.log(document.getElementById("input").focus());
-    const index = Math.floor(Math.random() * quotes.length);
-    const quote = quotes[index];
-    let quoteArray = quote.split(" ");
-    setWordIndex(0);
-    setCharIndex(0);
-    setNextCharIndex(1);
-    quoteArray = quoteArray.slice(1);
-    quoteArray = quoteArray.join(" ");
-    setQuote(quoteArray);
-    setQuoteArray(quote.split(" "));
-    setDone(false);
-    setSuccessChars("");
-  };
-
   return (
     <>
-      <Timer isActive={!done && start ? true : false} />
       <div className="container quotes">
         {!done ? (
           (quoteArray,
@@ -155,7 +134,7 @@ export default function TypeRacer({ quotes, start }) {
           charIndex,
           nextCharIndex && (
             <div className="quote">
-              <span className="quote-text success">{succesChars}</span>
+              <span className="quote-text success">{successChars}</span>
               {!error ? (
                 <span className="quote-text current-word">
                   {quoteArray[wordIndex][charIndex]}
@@ -203,11 +182,7 @@ export default function TypeRacer({ quotes, start }) {
         )}
         {done && (
           <div className="text-center">
-            <button
-              onClick={handleReset}
-              id="button"
-              className="btn btn-primary mt-5 "
-            >
+            <button id="button" className="btn btn-primary mt-5 ">
               Restart
             </button>
           </div>
