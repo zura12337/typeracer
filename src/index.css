@@ -6,6 +6,7 @@
 html body {
   font-family: "Share Tech Mono", serif;
   background-color: #1e2e55;
+  color: white;
 }
 
 .primary-text {
@@ -173,5 +174,11 @@ html body {
       -ms-flex-align: center;
           align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+.timer {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 50px;
 }
 /*# sourceMappingURL=index.css.map */

@@ -1,44 +1,34 @@
 import React, { useEffect, useState } from "react";
 
-export default function Timer({ isActive, onReset }) {
-  const [second, setSecond] = useState("00");
-  const [minute, setMinute] = useState("00");
-  const [counter, setCounter] = useState(0);
+export default function Timer({ isActive }) {
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
 
   useEffect(() => {
-    let intervalId;
-
     if (isActive) {
-      intervalId = setInterval(() => {
-        const secondCounter = counter % 60;
-        const minuteCounter = Math.floor(counter / 60);
-
-        const computedSecond =
-          String(secondCounter).length === 1
-            ? `0${secondCounter}`
-            : secondCounter;
-        const computedMinute =
-          String(minuteCounter).length === 1
-            ? `0${minuteCounter}`
-            : minuteCounter;
-
-        setSecond(computedSecond);
-        setMinute(computedMinute);
-
-        setCounter((counter) => counter + 1);
-      }, 1000);
+      if (seconds < 60) {
+        const timer = setInterval(() => {
+          setSeconds((seconds) => seconds + 1);
+        }, 1000);
+        return () => clearInterval(timer);
+      } else {
+        setMinutes((minutes) => minutes + 1);
+        setSeconds(0);
+      }
     }
-
-    return () => clearInterval(intervalId);
-  }, [isActive, counter]);
-
-  onReset = () => {};
+  }, [seconds, minutes, isActive]);
 
   return (
-    <div className="container text-center mt-5">
-      <h1 className="primary-text">
-        {minute} : {second}
-      </h1>
+    <div className="timer">
+      <h3>
+        <span className="minutes">
+          {minutes < 10 ? `0${minutes}` : minutes}
+        </span>
+        :
+        <span className="seconds">
+          {seconds < 10 ? `0${seconds}` : seconds}
+        </span>
+      </h3>
     </div>
   );
 }

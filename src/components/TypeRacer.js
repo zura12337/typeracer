@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Timer from "./Timer";
 
-export default function TypeRacer({ quote, start, setStart, setQuote }) {
+export default function TypeRacer({ quote, setQuote }) {
   const [error, setError] = useState("");
   const [successChars, setSuccessChars] = useState();
   const [wordIndex, setWordIndex] = useState();
@@ -128,6 +128,7 @@ export default function TypeRacer({ quote, start, setStart, setQuote }) {
   return (
     <>
       <div className="container quotes">
+        <Timer isActive={!done && true} />
         {!done ? (
           (quoteArray,
           wordIndex,
@@ -182,7 +183,11 @@ export default function TypeRacer({ quote, start, setStart, setQuote }) {
         )}
         {done && (
           <div className="text-center">
-            <button id="button" className="btn btn-primary mt-5 ">
+            <button
+              onClick={() => window.location.reload()}
+              id="button"
+              className="btn btn-primary mt-5 "
+            >
               Restart
             </button>
           </div>

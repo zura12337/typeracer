@@ -16,6 +16,7 @@ $danger: #ff4e4e;
 html body {
   font-family: "Share Tech Mono", serif;
   background-color: $body-bg;
+  color: white;
 }
 .primary-text {
   font-family: "Press Start 2P", serif;
@@ -153,4 +154,12 @@ html body {
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+// TIMER
+
+.timer {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 50px;
 }
