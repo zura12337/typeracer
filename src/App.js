@@ -14,7 +14,7 @@ export default function App() {
   const [started, setStarted] = useState(false);
 
   useEffect(() => {
-    const index = Math.floor(Math.random() * (quotes.length - 0 + 1) + 0);
+    const index = Math.floor(Math.random() * quotes.length);
     setQuote(quotes[index]);
   }, []);
 
