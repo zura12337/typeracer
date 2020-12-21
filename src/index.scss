@@ -96,7 +96,8 @@ html body {
 }
 
 .error {
-  color: $danger !important;
+  background-color: $danger !important;
+  color: white !important;
 }
 .placeholder {
   position: relative;
@@ -156,10 +157,21 @@ html body {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-// TIMER
+// Type details
 
-.timer {
-  width: 100%;
-  text-align: center;
-  margin-bottom: 50px;
+.type-details {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 30%;
+  height: max-content;
+  margin: auto;
+  padding: 15px 0 15px 0;
+  position: relative;
+  margin-bottom: 30px;
+  background-color: #10193a;
+  > * {
+    position: relative;
+    top: 5px;
+  }
 }

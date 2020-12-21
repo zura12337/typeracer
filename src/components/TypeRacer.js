@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import Timer from "./Timer";
+import TypeDetails from "./TypeDetails";
 
 export default function TypeRacer({ quote, setQuote }) {
   const [error, setError] = useState("");
@@ -12,9 +13,11 @@ export default function TypeRacer({ quote, setQuote }) {
   const [quoteArray, setQuoteArray] = useState([]);
   const [value, setValue] = useState("");
   const [done, setDone] = useState(false);
+  const [totalWords, setToTalWords] = useState();
 
   useEffect(() => {
     let quoteArray = quote.split(" ");
+    setToTalWords(quoteArray.length);
     setWordIndex(0);
     setCharIndex(0);
     setNextCharIndex(1);
@@ -128,7 +131,7 @@ export default function TypeRacer({ quote, setQuote }) {
   return (
     <>
       <div className="container quotes">
-        <Timer isActive={!done && true} />
+        <TypeDetails done={done} totalWords={totalWords} />
         {!done ? (
           (quoteArray,
           wordIndex,

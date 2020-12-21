@@ -11,6 +11,7 @@ const quotes = [
 
 export default function App() {
   const [quote, setQuote] = useState();
+  const [started, setStarted] = useState(false);
 
   useEffect(() => {
     const index = Math.floor(Math.random() * (quotes.length - 0 + 1) + 0);
@@ -20,7 +21,20 @@ export default function App() {
   return (
     <div>
       <NavBar />
-      {quote !== undefined && <TypeRacer quote={quote} setQuote={setQuote} />}
+      {!started && (
+        <div className="center">
+          <button
+            onClick={() => setStarted(true)}
+            className="btn btn-primary"
+            id="button"
+          >
+            Start Typing!
+          </button>
+        </div>
+      )}
+      {started && quote !== undefined && (
+        <TypeRacer quote={quote} setQuote={setQuote} />
+      )}
     </div>
   );
 }

@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 
-export default function Timer({ isActive }) {
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
-
+export default function Timer({
+  isActive,
+  seconds,
+  setSeconds,
+  minutes,
+  setMinutes,
+}) {
   useEffect(() => {
     if (isActive) {
       if (seconds < 60) {
@@ -16,7 +19,7 @@ export default function Timer({ isActive }) {
         setSeconds(0);
       }
     }
-  }, [seconds, minutes, isActive]);
+  }, [isActive, seconds, setMinutes, setSeconds]);
 
   return (
     <div className="timer">

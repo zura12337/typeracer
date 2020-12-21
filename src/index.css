@@ -104,7 +104,8 @@ html body {
 }
 
 .error {
-  color: #ff4e4e !important;
+  background-color: #ff4e4e !important;
+  color: white !important;
 }
 
 .placeholder {
@@ -176,9 +177,28 @@ html body {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.timer {
-  width: 100%;
-  text-align: center;
-  margin-bottom: 50px;
+.type-details {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 30%;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  margin: auto;
+  padding: 15px 0 15px 0;
+  position: relative;
+  margin-bottom: 30px;
+  background-color: #10193a;
+}
+
+.type-details > * {
+  position: relative;
+  top: 5px;
 }
 /*# sourceMappingURL=index.css.map */
