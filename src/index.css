@@ -178,12 +178,6 @@ html body {
 }
 
 .type-details {
-  display: -ms-grid;
-  display: grid;
-  place-items: center;
-  -ms-grid-columns: 1fr 1fr;
-      grid-template-columns: 1fr 1fr;
-  gap: 90px;
   width: calc(-webkit-max-content + 150px);
   width: calc(-moz-max-content + 150px);
   width: calc(max-content + 150px);
@@ -204,7 +198,16 @@ html body {
   top: 5px;
 }
 
-.type-details::after {
+.type-details-divider {
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  gap: 90px;
+}
+
+.type-details-divider::after {
   content: "";
   position: absolute;
   top: 20%;

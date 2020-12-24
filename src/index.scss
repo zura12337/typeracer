@@ -160,10 +160,6 @@ html body {
 // Type details
 
 .type-details {
-  display: grid;
-  place-items: center;
-  grid-template-columns: 1fr 1fr;
-  gap: 90px;
   width: calc(max-content + 150px);
   height: max-content;
   position: relative;
@@ -179,7 +175,14 @@ html body {
   }
 }
 
-.type-details::after {
+.type-details-divider {
+  display: grid;
+  place-items: center;
+  grid-template-columns: 1fr 1fr;
+  gap: 90px;
+}
+
+.type-details-divider::after {
   content: "";
   position: absolute;
   top: 20%;

@@ -18,7 +18,7 @@ export default function TypeDetails({ done, totalWords }) {
   }, [minutes, seconds, time, totalWords]);
 
   return (
-    <div className="type-details">
+    <div className={`type-details ${done && "type-details-divider"}`}>
       <Timer
         seconds={seconds}
         setSeconds={setSeconds}
