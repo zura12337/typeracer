@@ -1,6 +1,6 @@
 # Typing test 🚀
 
-## Website is demo version, only typing function is available :D 
+## Website is in demo version, only typing function is available :D 
 
 ---
 
