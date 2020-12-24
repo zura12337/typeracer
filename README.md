@@ -1,6 +1,10 @@
 # Typing test 🚀
 
+## Website is demo version, only typing function is available :D 
+
 ---
+
+
 
 Using this app u can practice in typing.
 
