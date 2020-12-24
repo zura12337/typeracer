@@ -10,6 +10,6 @@ Using this app u can practice in typing.
 - npm install
 - yarn install
 
-### Build
+### Build 🏗
 - npm run build
 - yarn build
