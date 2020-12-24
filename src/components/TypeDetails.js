@@ -15,7 +15,7 @@ export default function TypeDetails({ done, totalWords }) {
       setTime(seconds);
     }
     console.log(totalWords);
-  }, [minutes, seconds, time]);
+  }, [minutes, seconds, time, totalWords]);
 
   return (
     <div className="type-details">
