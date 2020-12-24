@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/typeracer/static/css/main.a3867b8c.chunk.css",
+    "main.js": "/typeracer/static/js/main.b2bb31ce.chunk.js",
+    "main.js.map": "/typeracer/static/js/main.b2bb31ce.chunk.js.map",
+    "runtime-main.js": "/typeracer/static/js/runtime-main.ff84a21b.js",
+    "runtime-main.js.map": "/typeracer/static/js/runtime-main.ff84a21b.js.map",
+    "static/css/2.1a02f21c.chunk.css": "/typeracer/static/css/2.1a02f21c.chunk.css",
+    "static/js/2.41901bae.chunk.js": "/typeracer/static/js/2.41901bae.chunk.js",
+    "static/js/2.41901bae.chunk.js.map": "/typeracer/static/js/2.41901bae.chunk.js.map",
+    "index.html": "/typeracer/index.html",
+    "static/css/2.1a02f21c.chunk.css.map": "/typeracer/static/css/2.1a02f21c.chunk.css.map",
+    "static/css/main.a3867b8c.chunk.css.map": "/typeracer/static/css/main.a3867b8c.chunk.css.map",
+    "static/js/2.41901bae.chunk.js.LICENSE.txt": "/typeracer/static/js/2.41901bae.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ff84a21b.js",
+    "static/css/2.1a02f21c.chunk.css",
+    "static/js/2.41901bae.chunk.js",
+    "static/css/main.a3867b8c.chunk.css",
+    "static/js/main.b2bb31ce.chunk.js"
+  ]
+}
