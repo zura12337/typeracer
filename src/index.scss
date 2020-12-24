@@ -160,29 +160,31 @@ html body {
 // Type details
 
 .type-details {
-  display: flex;
+  display: grid;
+  place-items: center;
+  grid-template-columns: 1fr 1fr;
+  gap: 90px;
+  width: calc(max-content + 150px);
+  height: max-content;
   position: relative;
   top: -50px;
-  justify-content: space-around;
-  align-items: center;
-  width: 30%;
-  height: max-content;
   margin: auto;
-  padding: 15px 0 15px 0;
+  padding: 15px 45px 15px 45px;
   margin-bottom: 30px;
   background-color: #10193a;
   border-radius: 5px;
-  > *:not(:first-child)::after {
-    content: "";
-    position: absolute;
-    left: -90%;
-    top: -7%;
-    width: 2px;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
   > * {
     position: relative;
     top: 5px;
   }
+}
+
+.type-details::after {
+  content: "";
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  width: 2px;
+  height: 60%;
+  background-color: rgba(0, 0, 0, 0.5);
 }

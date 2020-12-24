@@ -4,7 +4,7 @@ export default function Speed({ time, totalWords, done }) {
   const [wp, setWp] = useState();
 
   useEffect(() => {
-    setWp(Math.floor((60 / time) * totalWords));
+    setWp(Math.ceil((60 / time) * totalWords * 10) / 10);
   }, []);
 
   return (

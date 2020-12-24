@@ -178,39 +178,39 @@ html body {
 }
 
 .type-details {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  position: relative;
-  top: -50px;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  width: 30%;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  gap: 90px;
+  width: calc(-webkit-max-content + 150px);
+  width: calc(-moz-max-content + 150px);
+  width: calc(max-content + 150px);
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
+  position: relative;
+  top: -50px;
   margin: auto;
-  padding: 15px 0 15px 0;
+  padding: 15px 45px 15px 45px;
   margin-bottom: 30px;
   background-color: #10193a;
   border-radius: 5px;
 }
 
-.type-details > *:not(:first-child)::after {
-  content: "";
-  position: absolute;
-  left: -90%;
-  top: -7%;
-  width: 2px;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
 .type-details > * {
   position: relative;
   top: 5px;
+}
+
+.type-details::after {
+  content: "";
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  width: 2px;
+  height: 60%;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 /*# sourceMappingURL=index.css.map */
