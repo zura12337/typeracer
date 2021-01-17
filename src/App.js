@@ -1,22 +1,22 @@
 import { useState, useEffect } from "react";
 import NavBar from "./components/NavBar";
 import TypeRacer from "./components/TypeRacer";
-
-const quotes = [
-  "It is better to be hated for what you are than to be loved for what you are not",
-  "All that is gold does not glitter, Not all those who wander are lost; The old that is strong does not wither, Deep roots are not reached by the frost",
-  "Hello Omedia, Hello World",
-  "memories even you most precious ones fade surprisingly quickly",
-];
+import { getQuotes } from "./services/index";
 
 export default function App() {
   const [quote, setQuote] = useState();
   const [started, setStarted] = useState(false);
 
   useEffect(() => {
-    const index = Math.floor(Math.random() * quotes.length);
-    setQuote(quotes[index]);
+    fetchQuotes();
   }, []);
+
+  const fetchQuotes = async () => {
+    const { data: quotes } = await getQuotes();
+    const index = Math.floor(Math.random() * quotes.length);
+    console.log(quotes[index].text);
+    setQuote(quotes[index].text);
+  };
 
   return (
     <div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 export default function NavBar() {
   return (
@@ -20,16 +20,7 @@ export default function NavBar() {
       <div
         className="collapse navbar-collapse justify-content-end"
         id="navbarNavAltMarkup"
-      >
-        <div className="navbar-nav">
-          <a className="nav-item nav-link" href="/">
-            Sign In
-          </a>
-          <a id="button" className="nav-item nav-link" href="/">
-            Register
-          </a>
-        </div>
-      </div>
+      ></div>
     </nav>
   );
 }
